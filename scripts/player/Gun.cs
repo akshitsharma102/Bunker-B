@@ -17,7 +17,7 @@ namespace player
         public float iforce = 10f;
         public float fireRate = 15f;
         private float nextToFire = 0f;
-
+        public AudioSource A_s;
         
         void Start()
         {
@@ -31,7 +31,8 @@ namespace player
             if (Input.GetButton("Fire1") && Time.time >= nextToFire)
             {
                 nextToFire = Time.time + 1f / fireRate;
-                Shoot(); 
+                Shoot();
+                A_s.Play();
             }
         }
 
@@ -46,12 +47,13 @@ namespace player
                 Target target = hit.transform.GetComponent<Target>();
                 if(target != null)
                 {
-                    Instantiate(ps, hit.transform.position, Quaternion.identity);
+                    Instantiate(ps, hit.point, Quaternion.LookRotation(hit.normal));
+                    Instantiate(ps2, hit.point, Quaternion.LookRotation(hit.normal));
                     target.TakeDamage(damage);
                 }
                 else if(target == null)
                 {
-                    Instantiate(ps2, hit.transform.position, Quaternion.identity);
+                    Instantiate(ps2, hit.point, Quaternion.LookRotation(hit.normal));
                 }
                 if(hit.rigidbody != null)
                 {
