@@ -1,7 +1,9 @@
 ﻿using enemy;
+using System.CodeDom.Compiler;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace player
 {
@@ -11,19 +13,25 @@ namespace player
         public float range = 100f;
         public Camera fpsCam;
         public ParticleSystem ps;
-        public bool auto = false;
+        public ParticleSystem ps2;
+        public float iforce = 10f;
+        public float fireRate = 15f;
+        private float nextToFire = 0f;
 
+        
         void Start()
         {
-
+           
         }
 
 
         void Update()
         {
-            if (Input.GetButtonDown("Fire1"))
+            
+            if (Input.GetButton("Fire1") && Time.time >= nextToFire)
             {
-                Shoot();
+                nextToFire = Time.time + 1f / fireRate;
+                Shoot(); 
             }
         }
 
@@ -41,7 +49,16 @@ namespace player
                     Instantiate(ps, hit.transform.position, Quaternion.identity);
                     target.TakeDamage(damage);
                 }
+                else if(target == null)
+                {
+                    Instantiate(ps2, hit.transform.position, Quaternion.identity);
+                }
+                if(hit.rigidbody != null)
+                {
+                    hit.rigidbody.AddForce(-hit.normal * iforce);   
+                }
             }
         }
+        
     }
 }
