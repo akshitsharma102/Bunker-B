@@ -20,39 +20,60 @@ namespace player
         public AudioSource[] A_s;
         public int ammo;
         int temp;
-
-        
+        int virtualammo;
+        public int MaxAmmo;
+        public int temp2;
         void Start()
         {
             temp = ammo;
+            virtualammo = ammo;
         }
 
 
         void Update()
         {
-            if (ammo > 0)
+            
+            if (MaxAmmo > 0)
             {
-                if (Input.GetButton("Fire1") && Time.time >= nextToFire)
+                if (ammo > 0)
                 {
-                    nextToFire = Time.time + 1f / fireRate;
-                    Shoot();
-                    A_s[0].Play();
+                    if (Input.GetButton("Fire1") && Time.time >= nextToFire)
+                    {
+                        nextToFire = Time.time + 1f / fireRate;
+                        Shoot();
+                        A_s[0].Play();
+                    }
+                }
+                else if (ammo == 0 && virtualammo != ammo)
+                {
+                    if (Input.GetKeyDown(KeyCode.R))
+                    {
+                        Reload();
+                    }
+
                 }
             }
-            else if(ammo == 0)
+            else if(MaxAmmo <= 0)
             {
-                if(Input.GetKeyDown(KeyCode.R))
+                Debug.Log("Find some ammo!");
+            }
+            
+            if(ammo > 0 && virtualammo != ammo)
+            {
+                if (Input.GetKeyDown(KeyCode.R))
                 {
                     Reload();
                 }
-                
             }
 
         }
 
         void Shoot()
         {
+            
             ammo = ammo - 1;
+            int st = -1 * (ammo - temp);
+            int stored = st;
             RaycastHit hit;
             if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
             {
@@ -73,12 +94,16 @@ namespace player
                 {
                     hit.rigidbody.AddForce(-hit.normal * iforce);   
                 }
+                temp2 = stored;
+                
             }
         }
         void Reload()
         {
             ammo = temp;
             A_s[1].Play();
+            MaxAmmo = MaxAmmo - temp;
+            temp2 = 0;
         }
         
     }
