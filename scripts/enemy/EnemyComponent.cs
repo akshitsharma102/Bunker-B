@@ -26,6 +26,9 @@ namespace Enemy
 
         //attacking
         public GameObject projectile;
+
+        //death
+        public float health = 30f;
         private void Awake()
         {
             
@@ -84,7 +87,7 @@ namespace Enemy
             }
             
         }
-        private void resetAttack()
+        public void resetAttack()
         {
             Attacking = false;
            
@@ -95,6 +98,18 @@ namespace Enemy
             Gizmos.DrawWireSphere(transform.position, attackRange);
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, sightRange);
+        }
+        public void TakeDamage(float amount)
+        {
+            health -= amount;
+            if (health <= 0f)
+            {
+                Die();
+            }
+        }
+        void Die()
+        {
+            Destroy(gameObject);
         }
     }
 }

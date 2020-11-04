@@ -1,9 +1,9 @@
-﻿using enemy;
-using System.CodeDom.Compiler;
+﻿using System.CodeDom.Compiler;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Enemy;
 
 namespace player
 {
@@ -17,34 +17,48 @@ namespace player
         public float iforce = 10f;
         public float fireRate = 15f;
         private float nextToFire = 0f;
-        public AudioSource A_s;
+        public AudioSource[] A_s;
+        public int ammo;
+        int temp;
+
         
         void Start()
         {
-           
+            temp = ammo;
         }
 
 
         void Update()
         {
-            
-            if (Input.GetButton("Fire1") && Time.time >= nextToFire)
+            if (ammo > 0)
             {
-                nextToFire = Time.time + 1f / fireRate;
-                Shoot();
-                A_s.Play();
+                if (Input.GetButton("Fire1") && Time.time >= nextToFire)
+                {
+                    nextToFire = Time.time + 1f / fireRate;
+                    Shoot();
+                    A_s[0].Play();
+                }
             }
+            else if(ammo == 0)
+            {
+                if(Input.GetKeyDown(KeyCode.R))
+                {
+                    Reload();
+                }
+                
+            }
+
         }
 
         void Shoot()
         {
-            
+            ammo = ammo - 1;
             RaycastHit hit;
             if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
             {
                 
 
-                Target target = hit.transform.GetComponent<Target>();
+                EnemyComponent target = hit.transform.GetComponent<EnemyComponent>();
                 if(target != null)
                 {
                     Instantiate(ps, hit.point, Quaternion.LookRotation(hit.normal));
@@ -60,6 +74,11 @@ namespace player
                     hit.rigidbody.AddForce(-hit.normal * iforce);   
                 }
             }
+        }
+        void Reload()
+        {
+            ammo = temp;
+            A_s[1].Play();
         }
         
     }

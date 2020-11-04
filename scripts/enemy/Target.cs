@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
+
 namespace enemy
 {
     public class Target : MonoBehaviour
@@ -18,3 +19,4 @@ namespace enemy
         }
     }
 }
+*/
