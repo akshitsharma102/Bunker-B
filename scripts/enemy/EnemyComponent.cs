@@ -56,37 +56,38 @@ namespace Enemy
             {
                 walkPointSet = false;
             }
-            Debug.Log("patrolling is working");
+            
         }
         private void searchWalkPoint()
         {
             float randomZ = Random.Range(-walkPointRange, walkPointRange);
             if (Physics.Raycast(walkPoint, -transform.up, 2f, whatsground)) walkPointSet = true;
-            Debug.Log("searching is working");
+            
         }
         private void ChasePlayer()
         {
             agent.SetDestination(player.position);
-            Debug.Log("chasing is working");
+            
         }
         private void AttackPlayer()
         {
             agent.SetDestination(transform.position);
             transform.LookAt(player);
-            Rigidbody rb = Instantiate(projectile, bullet.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
+            
             if(!Attacking)
             {
                 Attacking = true;
+                Rigidbody rb = Instantiate(projectile, bullet.position, Quaternion.identity).GetComponent<Rigidbody>();
+                rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
                 Invoke(nameof(resetAttack), timeBetweenAttacks);
                 
             }
-            Debug.Log("attacking is working");
+            
         }
         private void resetAttack()
         {
             Attacking = false;
-            Debug.Log("patrolling is working");
+           
         }
         private void OnDrawGizmosSelected()
         {
