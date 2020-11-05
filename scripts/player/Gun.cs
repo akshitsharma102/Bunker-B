@@ -23,6 +23,8 @@ namespace player
         int virtualammo;
         public int MaxAmmo;
         public int temp2;
+        public Animator anim;
+        public float timetoreload = 2f;
         void Start()
         {
             temp = ammo;
@@ -49,6 +51,7 @@ namespace player
                     if (Input.GetKeyDown(KeyCode.R))
                     {
                         Reload();
+                        anim.SetBool("reloading", true);
                     }
 
                 }
@@ -62,7 +65,9 @@ namespace player
             {
                 if (Input.GetKeyDown(KeyCode.R))
                 {
+                    anim.SetBool("reloading", true);
                     Reload();
+                    
                 }
             }
 
@@ -102,8 +107,9 @@ namespace player
         {
             ammo = temp;
             A_s[1].Play();
-            MaxAmmo = MaxAmmo - temp;
+            MaxAmmo = MaxAmmo - temp2;
             temp2 = 0;
+            anim.SetBool("reloading", false);
         }
         
     }

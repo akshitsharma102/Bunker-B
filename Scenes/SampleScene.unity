@@ -988,6 +988,9 @@ MonoBehaviour:
   - {fileID: 973209279}
   ammo: 12
   MaxAmmo: 48
+  temp2: 0
+  anim: {fileID: 1185629807}
+  timetoreload: 2
 --- !u!82 &1092574117
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1114,6 +1117,9 @@ MonoBehaviour:
   - {fileID: 973209279}
   ammo: 35
   MaxAmmo: 140
+  temp2: 0
+  anim: {fileID: 1185629807}
+  timetoreload: 2
 --- !u!82 &1155012587
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1210,6 +1216,12 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &1185629807 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5879425352938091869, guid: 96e5dfb901e71364685270cc8ddc3aa9,
+    type: 3}
+  m_PrefabInstance: {fileID: 5879425353591172176}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1346766683 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6541638370254394137, guid: 96e5dfb901e71364685270cc8ddc3aa9,
@@ -1240,6 +1252,9 @@ MonoBehaviour:
   - {fileID: 973209279}
   ammo: 20
   MaxAmmo: 80
+  temp2: 0
+  anim: {fileID: 1185629807}
+  timetoreload: 2
 --- !u!82 &1346766688
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1463,6 +1478,9 @@ MonoBehaviour:
   - {fileID: 973209279}
   ammo: 3
   MaxAmmo: 12
+  temp2: 0
+  anim: {fileID: 1185629807}
+  timetoreload: 2
 --- !u!82 &2063370302
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1826,6 +1844,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8211382827366954805, guid: 05d168b4ca50f1c45af3ab86f35a444f,
         type: 3}
+    - target: {fileID: 3020081803775843286, guid: 96e5dfb901e71364685270cc8ddc3aa9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.318
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020081803775843286, guid: 96e5dfb901e71364685270cc8ddc3aa9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.463
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020081803775843286, guid: 96e5dfb901e71364685270cc8ddc3aa9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.611
+      objectReference: {fileID: 0}
     - target: {fileID: 3020081803775843287, guid: 96e5dfb901e71364685270cc8ddc3aa9,
         type: 3}
       propertyPath: m_Layer
@@ -1897,7 +1930,7 @@ PrefabInstance:
     - target: {fileID: 6541638370254394137, guid: 96e5dfb901e71364685270cc8ddc3aa9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6541638370254394137, guid: 96e5dfb901e71364685270cc8ddc3aa9,
         type: 3}
